@@ -36,7 +36,18 @@ const W12MForm = () => {
       <ReasonForSparing
         setReasonForSparing={(reasonForSparing: string) => setReasonForSparing(reasonForSparing)}
         initialValue={reasonForSparing}
-      />							
+      />		
+			<button
+        onClick={() => {
+          console.log(`Species Name = ${speciesName}`);
+					console.log(`Planet Name = ${planetName}`);
+					console.log(`Number of Beings = ${numberOfBeings}`);
+					console.log(`What is 2+2 = ${whatIs2Plus2}`);
+					console.log(`Reason for Sparing = ${reasonForSparing}`);
+        }}
+      >
+        Submit
+      </button>								
     </section>
   );
 };
