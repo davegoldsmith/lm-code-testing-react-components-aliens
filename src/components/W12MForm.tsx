@@ -3,11 +3,13 @@ import W12MHeader from "./W12MHeader";
 import SpeciesName from "./SpeciesName";
 import PlanetName from "./PlanetName";
 import NumberOfBeings from "./NumberOfBeings";
+import WhatIs2Plus2 from "./WhatIs2Plus2";
 
 const W12MForm = () => {
   const [speciesName, setSpeciesName] = useState<string>("");
 	const [planetName, setPlanetName] = useState<string>("");
 	const [numberOfBeings, setNumberOfBeings] = useState<number>(0);
+	const [whatIs2Plus2, setWhatIs2Plus2] = useState<string>("Not 4");
 
   return (
     <section className="w12MForm">
@@ -23,7 +25,11 @@ const W12MForm = () => {
       <NumberOfBeings
         setNumberOfBeings={(numberOfBeings: number) => setNumberOfBeings(numberOfBeings)}
         initialValue={numberOfBeings}
-      />					
+      />	
+      <WhatIs2Plus2
+        setWhatIs2Plus2={(whatIs2Plus2: string) => setWhatIs2Plus2(whatIs2Plus2)}
+        initialValue={whatIs2Plus2}
+      />							
     </section>
   );
 };
