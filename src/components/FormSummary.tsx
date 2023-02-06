@@ -10,6 +10,7 @@ interface FormSummaryProps {
 const FormSummary: React.FC<FormSummaryProps> = (props) => {
   return (
     <div>
+      <h3>Form Summary</h3>
         <div>
           <p>
             <strong>Species Name: </strong>

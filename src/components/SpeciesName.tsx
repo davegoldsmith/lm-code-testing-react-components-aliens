@@ -8,8 +8,9 @@ const SpeciesName: React.FC<SpeciesNameProps> = (props) => {
     <div>
       <label htmlFor="species-name">Species Name:</label>
       <input
+        aria-label="Species Name"
         type="text"
-        name="species-name"
+        id="species-name"        
         value={props.initialValue}
         onChange={(e) => {
           props.setSpeciesName(e.target.value);

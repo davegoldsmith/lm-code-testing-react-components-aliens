@@ -8,7 +8,8 @@ const WhatIs2Plus2: React.FC<WhatIs2Plus2Props> = (props) => {
     <div>
       <label htmlFor="what-is-2+2">What is 2+2?</label>
       <select
-        name="what-is-2+2"
+        aria-label="What Is 2 + 2"
+        id="what-is-2+2"
         value={props.initialValue}
         onChange={(e) => {
           props.setWhatIs2Plus2(e.target.value);

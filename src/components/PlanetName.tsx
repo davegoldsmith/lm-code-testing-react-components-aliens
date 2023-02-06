@@ -9,7 +9,8 @@ const PlanetName: React.FC<PlanetNameProps> = (props) => {
       <label htmlFor="planet-name">Planet Name:</label>
       <input
         type="text"
-        name="planet-name"
+        id="planet-name"
+        aria-label="Planet Name"
         value={props.initialValue}
         onChange={(e) => {
           props.setPlanetName(e.target.value);

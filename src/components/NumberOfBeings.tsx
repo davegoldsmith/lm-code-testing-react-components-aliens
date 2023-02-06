@@ -9,7 +9,8 @@ const NumberOfBeings: React.FC<NumberOfBeingsProps> = (props) => {
       <label htmlFor="number-of-beings">Number Of Beings:</label>
       <input
         type="text"
-        name="number-of-beings"
+        id="number-of-beings"
+        aria-label="Number of Beings"
         value={props.initialValue === 0 ? "" : props.initialValue}
         onChange={(e) => {
           let value = 0;
