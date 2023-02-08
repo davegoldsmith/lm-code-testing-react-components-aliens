@@ -1,11 +1,8 @@
-import { FormEvent, useContext } from "react";
+import { useContext } from "react";
 import { FormErrorsContext } from "./FormErrorsContext";
 
-interface SubmitProps {
-  handleSubmit: (e: FormEvent) => void;
-}
 
-const SubmitW12MForm: React.FC<SubmitProps> = ({handleSubmit}) => {
+const SubmitW12MForm: React.FC = () => {
   const formErrors = useContext(FormErrorsContext);
   /**
    * Checks errors on each component to see if submit is allowed

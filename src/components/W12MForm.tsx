@@ -80,7 +80,7 @@ const W12MForm = () => {
           }
           reasonForSparing={reasonForSparing}
         />
-				<SubmitW12MForm handleSubmit={handleSubmit} />
+				<SubmitW12MForm  />
         {isSubmit === true && (
           <FormSummary
             speciesName={speciesName}
