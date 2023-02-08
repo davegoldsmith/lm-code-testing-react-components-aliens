@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import userEvent  from '@testing-library/user-event'
+import userEvent  from '@testing-library/user-event';
 import SpeciesName from "./SpeciesName";
 import W12MForm from "./W12MForm";
 

@@ -1,14 +1,24 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ErrorMessage from "./ErrorMessage";
+import { UpdateFormErrorsContext } from "./FormErrorsContext";
 
 interface PlanetNameProps {
   setPlanetName: (planetName: string) => void;
   planetName: string;
 }
 
-const PlanetName: React.FC<PlanetNameProps> = (props) => {
-
+const PlanetName: React.FC<PlanetNameProps> = ({setPlanetName, planetName}) => {
+  const compName = "PlanetName";
+  const updateFormErrors = useContext(UpdateFormErrorsContext);
   const [ errorMessage, setErrorMessage ] = useState<string | undefined>();
+  useEffect(() => {
+    const errorMessage = validate(planetName);
+    setErrorMessage(errorMessage);
+    updateFormErrors({
+      componentName: compName,
+      hasErrors: errorMessage !== undefined,
+    });
+  }, [planetName]);
 
   const validate = (value: string) : string | undefined => {
     if (/^[a-zA-Z0-9]+$/.test(value) === false) {
@@ -26,11 +36,9 @@ const PlanetName: React.FC<PlanetNameProps> = (props) => {
         type="text"
         id="planet-name"
         aria-label="Planet Name"
-        value={props.planetName}
+        value={planetName}
         onChange={(e) => {
-          const errorMessage = validate(e.target.value);
-          setErrorMessage(errorMessage);
-          props.setPlanetName(e.target.value);
+          setPlanetName(e.target.value);
         }}
       />
       <ErrorMessage errorMessage={errorMessage} />

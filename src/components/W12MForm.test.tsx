@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import userEvent  from '@testing-library/user-event';
 import W12MForm from "./W12MForm";
 
 test("renders form element", () => {
@@ -11,14 +12,31 @@ test("renders form element", () => {
   expect(container.firstChild).toHaveClass("w12MForm");
 });
 
-test("that summary form is shown when submit button is pressed", () => {
+test(`Given all data is valid,
+      When submit button is pressed,
+      then  summary form is shown`, async() => {
   render(<W12MForm />);
 
 	expect(screen.queryByText(/Form Summary/i)).not.toBeInTheDocument();
 
-  const inputNode = screen.getByLabelText(/submit/i);
+  const submitButton = screen.getByLabelText(/submit/i);
 
-  fireEvent.click(inputNode);
+  expect(submitButton).toBeDisabled();
+
+  const speciesInput = screen.getByLabelText(/species name/i);
+  const numOfBeingsInput = screen.getByLabelText(/number of beings/i);
+  const planetInput = screen.getByLabelText(/planet name/i);
+  const whatIsSumInput = screen.getByLabelText(/what is 2/i);
+  const reasonForSparingInput = screen.getByLabelText(/reason for sparing/i);
+
+  await userEvent.type(speciesInput, "Earthling");
+  await userEvent.type(planetInput, "Earth");
+  await userEvent.selectOptions(whatIsSumInput, "4");
+  await userEvent.type(numOfBeingsInput, "1000000000000");
+  await userEvent.type(reasonForSparingInput, "We are very nice and friendly");
+
+  expect(submitButton).not.toBeDisabled();
+  await userEvent.click(submitButton);
 
 	expect(screen.getByText(/Form Summary/i)).toBeInTheDocument();
 });
