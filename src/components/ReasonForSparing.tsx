@@ -3,7 +3,7 @@ import ErrorMessage from "./ErrorMessage";
 
 interface ReasonForSparingProps {
   setReasonForSparing: (reasonForSparing: string) => void;
-  initialValue: string;
+  reasonForSparing: string;
 }
 
 const ReasonForSparing: React.FC<ReasonForSparingProps> = (props) => {
@@ -12,7 +12,7 @@ const ReasonForSparing: React.FC<ReasonForSparingProps> = (props) => {
 
   const validate = (value: string) : string | undefined => {
     if (value.length < 17 || value.length > 153) {
-      return "❌ Reason for Sparing name must have length between 17 and 153";
+      return "❌ Reason for Sparing must have length between 17 and 153";
     }
     return undefined;
   };
@@ -23,7 +23,7 @@ const ReasonForSparing: React.FC<ReasonForSparingProps> = (props) => {
       <textarea
         aria-label="Reason for Sparing"
         id="reason-for-sparing"
-        value={props.initialValue}
+        value={props.reasonForSparing}
         rows={4}
         cols={10}
         onChange={(e) => {

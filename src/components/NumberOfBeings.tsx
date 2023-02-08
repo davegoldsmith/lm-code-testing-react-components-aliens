@@ -3,7 +3,7 @@ import ErrorMessage from "./ErrorMessage";
 
 interface NumberOfBeingsProps {
   setNumberOfBeings: (numberOfBeings: number) => void;
-  initialValue: number;
+  numberOfBeings: number;
 }
 
 const NumberOfBeings: React.FC<NumberOfBeingsProps> = (props) => {
@@ -23,7 +23,7 @@ const NumberOfBeings: React.FC<NumberOfBeingsProps> = (props) => {
         type="text"
         id="number-of-beings"
         aria-label="Number of Beings"
-        value={props.initialValue === 0 ? "" : props.initialValue}
+        value={props.numberOfBeings === 0 ? "" : props.numberOfBeings}
         onChange={(e) => {
           let value = 0;
           if (e.target.value) {

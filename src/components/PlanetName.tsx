@@ -3,7 +3,7 @@ import ErrorMessage from "./ErrorMessage";
 
 interface PlanetNameProps {
   setPlanetName: (planetName: string) => void;
-  initialValue: string;
+  planetName: string;
 }
 
 const PlanetName: React.FC<PlanetNameProps> = (props) => {
@@ -26,7 +26,7 @@ const PlanetName: React.FC<PlanetNameProps> = (props) => {
         type="text"
         id="planet-name"
         aria-label="Planet Name"
-        value={props.initialValue}
+        value={props.planetName}
         onChange={(e) => {
           const errorMessage = validate(e.target.value);
           setErrorMessage(errorMessage);

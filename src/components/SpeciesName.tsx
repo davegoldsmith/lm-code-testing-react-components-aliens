@@ -3,7 +3,7 @@ import ErrorMessage from "./ErrorMessage";
 
 interface SpeciesNameProps {
   setSpeciesName: (speciesName: string) => void;
-  initialValue: string;
+  speciesName: string;
 }
 
 const SpeciesName: React.FC<SpeciesNameProps> = (props) => {
@@ -12,7 +12,7 @@ const SpeciesName: React.FC<SpeciesNameProps> = (props) => {
   // const validate : (value : string) => string | undefined = (value) => {
   const validate = (value: string) : string | undefined => {
     if (/^[A-Za-z\s]*$/.test(value) === false) {
-      return "❌ Species Name must only contain only letters";
+      return "❌ Species Name must only contain only letters";      
     } if (value.length < 3 || value.length > 23) {
       return "❌ Species Must have length between 3 and 23";
     }
@@ -26,7 +26,7 @@ const SpeciesName: React.FC<SpeciesNameProps> = (props) => {
         aria-label="Species Name"
         type="text"
         id="species-name"        
-        value={props.initialValue}
+        value={props.speciesName}
         onChange={(e) => {
           const errorMessage = validate(e.target.value);
           setErrorMessage(errorMessage);

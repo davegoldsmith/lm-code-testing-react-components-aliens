@@ -11,7 +11,7 @@ const W12MForm = () => {
   const [speciesName, setSpeciesName] = useState<string>("");
   const [planetName, setPlanetName] = useState<string>("");
   const [numberOfBeings, setNumberOfBeings] = useState<number>(0);
-  const [whatIs2Plus2, setWhatIs2Plus2] = useState<string>("Not 4");
+  const [whatIs2Plus2, setWhatIs2Plus2] = useState<string>("4");
   const [reasonForSparing, setReasonForSparing] = useState<string>("");
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
 
@@ -20,29 +20,29 @@ const W12MForm = () => {
       <W12MHeader />
       <SpeciesName
         setSpeciesName={(species: string) => setSpeciesName(species)}
-        initialValue={speciesName}
+        speciesName={speciesName}
       />
       <PlanetName
         setPlanetName={(planetName: string) => setPlanetName(planetName)}
-        initialValue={planetName}
+        planetName={planetName}
       />
       <NumberOfBeings
         setNumberOfBeings={(numberOfBeings: number) =>
           setNumberOfBeings(numberOfBeings)
         }
-        initialValue={numberOfBeings}
+        numberOfBeings={numberOfBeings}
       />
       <WhatIs2Plus2
         setWhatIs2Plus2={(whatIs2Plus2: string) =>
           setWhatIs2Plus2(whatIs2Plus2)
         }
-        initialValue={whatIs2Plus2}
+        whatIs2Plus2={whatIs2Plus2}
       />
       <ReasonForSparing
         setReasonForSparing={(reasonForSparing: string) =>
           setReasonForSparing(reasonForSparing)
         }
-        initialValue={reasonForSparing}
+        reasonForSparing={reasonForSparing}
       />
       <button
         type="submit"

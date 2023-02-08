@@ -3,7 +3,7 @@ import ErrorMessage from "./ErrorMessage";
 
 interface WhatIs2Plus2Props {
   setWhatIs2Plus2: (setWhatIs2Plus2Choice: string) => void;
-  initialValue: string;
+  whatIs2Plus2: string;
 }
 
 const WhatIs2Plus2: React.FC<WhatIs2Plus2Props> = (props) => {
@@ -23,9 +23,9 @@ const WhatIs2Plus2: React.FC<WhatIs2Plus2Props> = (props) => {
       <select
         aria-label="What Is 2 + 2"
         id="what-is-2+2"
-        value={props.initialValue}
+        value={props.whatIs2Plus2}
         onLoad={() => {
-          const errorMessage = validate(props.initialValue);
+          const errorMessage = validate(props.whatIs2Plus2);
           setErrorMessage(errorMessage); 
         }}
         onChange={(e) => {

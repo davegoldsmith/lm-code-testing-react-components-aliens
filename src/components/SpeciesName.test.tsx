@@ -1,15 +1,15 @@
-import { render, screen, fireEvent, findByRole } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent  from '@testing-library/user-event'
 import SpeciesName from "./SpeciesName";
 import W12MForm from "./W12MForm";
 
 describe("Test the text field on SpeciesName updates as expected", () => {
-  it(`Given the required props,
-  When the component is rendered,
-  Then the species name should be present`, () => {
+  test(`Given the required props,
+        When the component is rendered,
+        Then the species name should be present`, () => {
     const speciesProps = {
       setSpeciesName: jest.fn(),
-      initialValue: "Human Being",
+      speciesName: "Human Being",
     };
     render(<SpeciesName {...speciesProps} />);
 
@@ -20,38 +20,28 @@ describe("Test the text field on SpeciesName updates as expected", () => {
   });
 
   test(`Given the required props, 
-  When input text is updated, 
-  Then setSpeciesName() function is called`, async () => {
+        When input text is updated, 
+        Then setSpeciesName() function is called`, async () => {
     const speciesProps = {
       setSpeciesName: jest.fn(),
-      initialValue: "",
+      speciesName: "",
     };
     render(<SpeciesName {...speciesProps} />);
 
     const inputNode = screen.getByLabelText(/species name/i);
-    // await userEvent.type(inputNode, "Earthling");
-    fireEvent.change(inputNode, { target: { value: "Earthling" } });
+    await userEvent.type(inputNode, "Earthling");
 
-    expect(speciesProps.setSpeciesName).toBeCalledTimes(1);
-    expect(speciesProps.setSpeciesName).toBeCalledWith("Earthling")
-
-    // screen.debug(screen.getByRole("textbox"));
-    // screen.debug(inputNode);
-    // expect(screen.getByRole("textbox")).toHaveValue("Earthling");
-
-
+    expect(speciesProps.setSpeciesName).toBeCalledTimes(9);
+    expect(speciesProps.setSpeciesName).toBeCalledWith("g");
   });
 
-  // I've added this test because the fireEvent doesn't seem to update
-  // at the component level, so used the parent form as render context
-  // instead. Not really sure why this is?
-  test(`Given that the SpeciesName coponent is rendered,
-  When text is updated,
-  then the text field's content is updated`, () => {
+  test(`Given that the SpeciesName component is rendered,
+        When text is updated,
+        Then the text field's content is updated`, async () => {
     render(<W12MForm />);
 
     const inputNode = screen.getByLabelText(/species name/i);
-    fireEvent.change(inputNode, { target: { value: "Earthling" } });
+    await userEvent.type(inputNode, "Earthling");
 
     expect(screen.getByLabelText(/species name/i)).toHaveValue("Earthling");
   });
@@ -59,17 +49,13 @@ describe("Test the text field on SpeciesName updates as expected", () => {
 
 describe("Test SpeciesName validation", () => {
   it(`Given the required props,
-    When the text is updated to be less than 3 characters,
-    Then wrong length error message should be visible`, () => {
-    // const speciesProps = {
-    //   setSpeciesName: () => {},
-    //   initialValue: "",
-    // };
-    // render(<SpeciesName {...speciesProps} />);
+      When the text is updated to be less than 3 characters,
+      Then wrong length error message should be visible`, async () => {
+
     render(<W12MForm />);
 
     const inputNode = screen.getByLabelText(/species name/i);
-    fireEvent.change(inputNode, { target: { value: "me" } });
+    await userEvent.type(inputNode, "me");
 
     expect(
       screen.getByText("❌ Species Must have length between 3 and 23")
@@ -78,18 +64,12 @@ describe("Test SpeciesName validation", () => {
 
   it(`Given the required props,
       When the text is updated to be more than 23 characters,
-      Then wrong length error message should be visible`, () => {
-    // const speciesProps = {
-    //   setSpeciesName: () => {},
-    //   initialValue: "",
-    // };
-    // render(<SpeciesName {...speciesProps} />);
+      Then wrong length error message should be visible`, async () => {
+
     render(<W12MForm />);
 
     const inputNode = screen.getByLabelText(/species name/i);
-    fireEvent.change(inputNode, {
-      target: { value: "thisisaverylongspeciesnameandwillbreakvalidation" },
-    });
+    await userEvent.type(inputNode, "thisisaverylongspeciesnameandwillbreakvalidation");
 
     expect(
       screen.getByText("❌ Species Must have length between 3 and 23")
@@ -97,17 +77,12 @@ describe("Test SpeciesName validation", () => {
   });
 
   it(`Given the required props,
-  When the component is rendered,
-  Then the species name should be present`, () => {
-    // const speciesProps = {
-    //   setSpeciesName: () => {},
-    //   initialValue: "",
-    // };
-    // render(<SpeciesName {...speciesProps} />);
+      When the component is rendered,
+      Then the species name should be present`, async () => {
     render(<W12MForm />);
 
     const inputNode = screen.getByLabelText(/species name/i);
-    fireEvent.change(inputNode, { target: { value: "%$" } });
+    await userEvent.type(inputNode, "%$");
 
     expect(
       screen.getByText("❌ Species Name must only contain only letters")
