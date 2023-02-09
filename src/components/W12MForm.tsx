@@ -11,7 +11,6 @@ import SubmitW12MForm from "./SubmitW12MForm";
 
 const handleSubmit = (e: FormEvent) => {
   e.preventDefault();
-	alert(e.currentTarget);
 };
 
 const W12MForm = ({ onSubmit = handleSubmit }) => {
