@@ -15,7 +15,8 @@ test("renders form element", () => {
 test(`Given all data is valid,
       When submit button is pressed,
       then  summary form is shown`, async() => {
-  render(<W12MForm />);
+  const onSubmit = jest.fn();
+  render(<W12MForm onSubmit={onSubmit}/>);
 
 	expect(screen.queryByText(/Form Summary/i)).not.toBeInTheDocument();
 
@@ -36,7 +37,8 @@ test(`Given all data is valid,
   await userEvent.type(reasonForSparingInput, "We are very nice and friendly");
 
   expect(submitButton).not.toBeDisabled();
-  await userEvent.click(submitButton);
+  fireEvent.submit(submitButton);
+  expect(onSubmit).toBeCalled();
 
 	expect(screen.getByText(/Form Summary/i)).toBeInTheDocument();
 });

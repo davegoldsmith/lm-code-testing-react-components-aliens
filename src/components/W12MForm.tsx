@@ -9,7 +9,12 @@ import FormSummary from "./FormSummary";
 import FormErrorsContextProvider, { ComponentError } from "./FormErrorsContext";
 import SubmitW12MForm from "./SubmitW12MForm";
 
-const W12MForm = () => {
+const handleSubmit = (e: FormEvent) => {
+  e.preventDefault();
+	alert(e.currentTarget);
+};
+
+const W12MForm = ({ onSubmit = handleSubmit }) => {
   const [speciesName, setSpeciesName] = useState<string>("");
   const [planetName, setPlanetName] = useState<string>("");
   const [numberOfBeings, setNumberOfBeings] = useState<number>(0);
@@ -18,17 +23,18 @@ const W12MForm = () => {
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
   const [formErrors, setFormErrors] = useState<Array<ComponentError>>([]);
 
-	/**
-	 * Updates the array of component errors, if a component's validation
-	 * fails then it is flagged as having errors. When validation passes
-	 * then the flag is set to false for that coponent.
-	 * 
-	 * @param componentError the component and it's error status
-	 */
+  /**
+   * Updates the array of component errors, if a component's validation
+   * fails then it is flagged as having errors. When validation passes
+   * then the flag is set to false for that coponent.
+   *
+   * @param componentError the component and it's error status
+   */
   const updateFormErrors = (componentError: ComponentError) => {
     if (
-      formErrors.filter((err) => err.componentName === componentError.componentName)
-        .length === 0
+      formErrors.filter(
+        (err) => err.componentName === componentError.componentName
+      ).length === 0
     ) {
       // add new error
       setFormErrors([...formErrors, componentError]);
@@ -36,23 +42,26 @@ const W12MForm = () => {
       // replace the existing
       setFormErrors(
         formErrors.map((err) =>
-          err.componentName === componentError.componentName ? componentError : err
+          err.componentName === componentError.componentName
+            ? componentError
+            : err
         )
       );
     }
   };
-
-	const handleSubmit = (e: FormEvent) => {
-		e.preventDefault();
-		setIsSubmit(true);
-	}
 
   return (
     <FormErrorsContextProvider
       formErrors={formErrors}
       updateFormErrors={updateFormErrors}
     >
-      <form className="w12MForm" onSubmit={handleSubmit}>
+      <form
+        className="w12MForm"
+        onSubmit={(e: FormEvent) => {
+          onSubmit(e);
+          setIsSubmit(true);
+        }}
+      >
         <W12MHeader />
         <SpeciesName
           setSpeciesName={(species: string) => setSpeciesName(species)}
@@ -80,7 +89,7 @@ const W12MForm = () => {
           }
           reasonForSparing={reasonForSparing}
         />
-				<SubmitW12MForm  />
+        <SubmitW12MForm />
         {isSubmit === true && (
           <FormSummary
             speciesName={speciesName}
